@@ -3,427 +3,322 @@ import React, { useMemo, useState } from "react";
 const chapters = [
   {
     id: "ch1",
+    short: "Units",
     title: "Ch. 1 — Measurement & Units",
-    world: "Tutorial Island",
     boss: "Unit Goblin",
-    bigIdea: "Units are part of the answer. If the units are wrong, the physics is wrong.",
+    bigIdea: "Units are part of the answer. Cancel units like algebra and your setup will tell you if the formula makes sense.",
     mustKnow: ["SI units", "unit conversion", "scientific notation", "significant figures", "dimensional analysis"],
-    learnDeep: [
-      "Write units on every number before doing math.",
-      "Use dimensional analysis like a spell-checker for physics.",
-      "If the problem asks for speed, the final unit should be distance/time.",
-      "Most unit mistakes happen because you convert mentally instead of canceling units on paper."
-    ],
-    formulas: ["v = d/t", "density = mass/volume", "1 km = 1000 m", "1 h = 3600 s"],
-    traps: ["Dropping units", "Rounding too early", "Converting without canceling units"],
-    examples: [
-      { q: "Convert 72 km/h to m/s.", steps: "72 x 1000 / 3600", a: "20 m/s" },
-      { q: "A 12 kg object has volume 3 m^3. Density?", steps: "density = m/V = 12/3", a: "4 kg/m^3" }
-    ],
-    game: { q: "A runner travels 100 m in 10 s. Speed?", choices: ["10 m/s", "1000 m/s", "0.1 m/s", "90 m/s"], a: "10 m/s", why: "speed = distance/time = 100/10 = 10 m/s." },
-    card: ["Dimensional analysis", "Cancel units like algebra before calculating."]
+    formulas: ["speed = distance / time", "density = mass / volume", "1 km = 1000 m", "1 h = 3600 s"],
+    traps: ["Dropping units", "Rounding too early", "Not checking the final unit"],
+    examples: [{ q: "Convert 72 km/h to m/s.", a: "20 m/s", steps: "72 × 1000 / 3600 = 20." }],
+    card: ["Dimensional analysis", "Write conversions as fractions and cancel units before calculating."]
   },
   {
     id: "ch2",
+    short: "Motion",
     title: "Ch. 2 — One-Dimensional Motion",
-    world: "Kinematics Canyon",
     boss: "Acceleration Serpent",
-    bigIdea: "Motion problems are stories about position, velocity, acceleration, and time.",
-    mustKnow: ["displacement", "velocity", "acceleration", "free fall", "motion graphs"],
-    learnDeep: [
-      "Position tells where you are; displacement tells change in position.",
-      "Velocity is how fast position changes; acceleration is how fast velocity changes.",
-      "On graphs: position-time slope is velocity, velocity-time slope is acceleration, velocity-time area is displacement.",
-      "Free fall is constant acceleration with g = 9.8 m/s^2."
-    ],
-    formulas: ["v = v0 + at", "x = x0 + v0t + 1/2at^2", "v^2 = v0^2 + 2aDx", "g = 9.8 m/s^2"],
+    bigIdea: "Motion problems are stories about position, velocity, acceleration, and time. Graphs show the same story visually.",
+    mustKnow: ["position", "displacement", "velocity", "acceleration", "free fall", "motion graphs"],
+    formulas: ["v = v0 + at", "x = x0 + v0t + 1/2at²", "v² = v0² + 2aΔx", "g = 9.8 m/s²"],
     traps: ["Mixing velocity and acceleration", "Forgetting signs", "Confusing graph slope and area"],
-    examples: [
-      { q: "A car starts from rest and accelerates at 3 m/s^2 for 6 s. Final speed?", steps: "v = v0 + at = 0 + 3(6)", a: "18 m/s" },
-      { q: "A rock drops from rest for 2 s. Distance?", steps: "y = 1/2gt^2 = 1/2(9.8)(4)", a: "19.6 m" }
-    ],
-    game: { q: "On a position-time graph, slope means what?", choices: ["Velocity", "Acceleration", "Force", "Mass"], a: "Velocity", why: "Slope of position-time is velocity. Area under velocity-time is displacement." },
+    examples: [{ q: "A car starts from rest and accelerates at 3 m/s² for 6 s. Final speed?", a: "18 m/s", steps: "v = 0 + 3(6)." }],
     card: ["Position-time slope", "Velocity."]
   },
   {
     id: "ch3",
-    title: "Ch. 3 — Vectors & 2D Motion",
-    world: "Vector Valley",
+    short: "Vectors",
+    title: "Ch. 3 — Vectors, Projectiles, Relative Motion",
     boss: "Projectile Dragon",
-    bigIdea: "Two-dimensional motion becomes manageable when you split vectors into x and y components.",
-    mustKnow: ["components", "resultants", "projectile motion", "trig", "independent x/y motion"],
-    learnDeep: [
-      "Split every angled vector into x and y pieces before solving.",
-      "Projectile motion is two problems at once: horizontal constant velocity and vertical acceleration.",
-      "If the angle is measured from the horizontal, x usually uses cosine and y usually uses sine.",
-      "The x and y motions share time, but they do not share acceleration."
-    ],
-    formulas: ["Ax = A cos theta", "Ay = A sin theta", "R = sqrt(Rx^2 + Ry^2)", "tan theta = Ry/Rx"],
-    traps: ["Using sine/cosine backward", "Mixing x and y equations", "Forgetting horizontal acceleration is zero"],
+    bigIdea: "Split vectors into x and y. Horizontal and vertical motion are connected by time, not by sharing acceleration.",
+    mustKnow: ["components", "resultants", "projectile motion", "parametric motion", "relative velocity", "circular acceleration"],
+    formulas: ["Ax = A cosθ", "Ay = A sinθ", "|A| = √(Ax² + Ay²)", "x = vx t", "y = y0 + v0y t - 1/2gt²", "ac = v²/r = ω²r", "ω = 2π/T"],
+    traps: ["Using sine/cosine backward", "Mixing x and y equations", "Forgetting v0y = 0 for horizontal launch", "Forgetting velocity is derivative of position"],
     examples: [
-      { q: "A 50 N force acts 30 degrees above horizontal. Find components.", steps: "Fx = 50cos30, Fy = 50sin30", a: "Fx = 43.3 N, Fy = 25 N" },
-      { q: "A ball rolls horizontally off a table. What is ax?", steps: "Gravity acts vertically only.", a: "ax = 0" }
+      { q: "48.0 m river jump, vertical drop 19.5 m. Minimum horizontal speed?", a: "24.1 m/s", steps: "-19.5 = -4.9t² gives t = 1.995 s. vx = 48.0/1.995." },
+      { q: "Boat 4.2 m/s east, river 2.0 m/s south. Resultant speed?", a: "4.65 m/s", steps: "√(4.2² + 2.0²)." }
     ],
-    game: { q: "Projectile motion has horizontal acceleration equal to what?", choices: ["0", "9.8 m/s^2", "v/t", "mg"], a: "0", why: "Ignoring air resistance, gravity only accelerates vertically." },
-    card: ["Projectile motion", "x motion is constant velocity; y motion accelerates by gravity."]
+    card: ["Projectile checklist", "Find time from vertical motion, then use horizontal motion."]
   },
   {
     id: "ch4",
+    short: "Forces",
     title: "Ch. 4 — Newton's Laws",
-    world: "Force Forest",
     boss: "Free-Body Phantom",
-    bigIdea: "Forces cause acceleration. Free-body diagrams turn chaos into equations.",
-    mustKnow: ["Newton's laws", "free-body diagrams", "net force", "weight", "normal force"],
-    learnDeep: [
-      "Draw the free-body diagram before writing equations.",
-      "Only forces go on a free-body diagram. Velocity is not a force.",
-      "Net force is what is left after forces fight each other.",
-      "Normal force is a support force, not automatically equal to mg in every situation."
-    ],
-    formulas: ["sum F = ma", "W = mg", "a = Fnet/m"],
-    traps: ["Skipping the FBD", "Calling velocity a force", "Assuming normal force always equals mg"],
+    bigIdea: "Forces cause acceleration. A free-body diagram turns the problem into x and y equations.",
+    mustKnow: ["Newton's laws", "free-body diagrams", "net force", "weight", "normal force", "impulse", "piecewise motion"],
+    formulas: ["ΣF = ma", "W = mg", "J = Favg Δt = Δp", "v = dx/dt", "a = dv/dt"],
+    traps: ["Putting velocity on a FBD", "Assuming normal force always equals mg", "Forgetting upward acceleration means N > mg", "Not converting mph to m/s"],
     examples: [
-      { q: "40 N right and 10 N left act on a 10 kg box. Acceleration?", steps: "Fnet = 30 N, a = 30/10", a: "3 m/s^2 right" },
-      { q: "Find weight of a 6 kg object.", steps: "W = mg = 6(9.8)", a: "58.8 N" }
+      { q: "0.160 kg puck pushed by 0.250 N for 2.0 s. Speed?", a: "3.13 m/s", steps: "a = F/m = 1.5625. v = at." },
+      { q: "0.145 kg ball reaches 42.2 m/s in 0.020 s. Average force?", a: "306 N", steps: "Favg = mΔv/Δt." }
     ],
-    game: { q: "A 5 kg object has net force 15 N. Acceleration?", choices: ["3 m/s^2", "75 m/s^2", "10 m/s^2", "0.33 m/s^2"], a: "3 m/s^2", why: "a = F/m = 15/5 = 3 m/s^2." },
-    card: ["Newton's second law", "sum F = ma."]
+    card: ["Newton checklist", "Draw FBD, choose axes, write ΣF = ma."]
   },
   {
     id: "ch5",
+    short: "Friction",
     title: "Ch. 5 — Applying Newton's Laws",
-    world: "Friction Fortress",
     boss: "Ramp Troll",
-    bigIdea: "Friction, tension, inclines, and circular motion are Newton's laws in disguise.",
-    mustKnow: ["friction", "tension", "inclines", "centripetal acceleration", "circular force"],
-    learnDeep: [
-      "For ramps, rotate your axes so one axis lies along the ramp.",
-      "Friction depends on normal force, not automatically on mg.",
-      "Centripetal force is not a new force. It is the net inward force making circular motion happen.",
-      "Tension pulls along the rope and is usually the same through a massless ideal rope."
-    ],
-    formulas: ["fk = mu k N", "fs <= mu s N", "Fc = mv^2/r", "mg sin theta down ramp", "mg cos theta into ramp"],
-    traps: ["Using mg instead of N on ramps", "Treating centripetal force as a separate force", "Mixing static and kinetic friction"],
-    examples: [
-      { q: "A block is on a 30 degree ramp. What pulls it downhill?", steps: "Use ramp axes.", a: "mg sin30" },
-      { q: "1000 kg car at 20 m/s turns with radius 50 m. Centripetal force?", steps: "Fc = mv^2/r = 1000(20^2)/50", a: "8000 N" }
-    ],
-    game: { q: "Down-ramp gravity component is?", choices: ["mg sin theta", "mg cos theta", "mu N", "mv^2/r"], a: "mg sin theta", why: "Parallel to ramp is mg sin theta; perpendicular is mg cos theta." },
-    card: ["Ramp components", "mg sin theta down ramp; mg cos theta into ramp."]
+    bigIdea: "Friction, tension, inclines, and circular motion are Newton's laws wearing costumes.",
+    mustKnow: ["friction", "tension", "inclines", "centripetal force", "circular motion"],
+    formulas: ["fk = μkN", "fs ≤ μsN", "Fc = mv²/r", "mg sinθ down ramp", "mg cosθ into ramp"],
+    traps: ["Using mg instead of N on ramps", "Treating centripetal force as a new force", "Mixing static and kinetic friction"],
+    examples: [{ q: "1000 kg car at 20 m/s turns with radius 50 m. Centripetal force?", a: "8000 N", steps: "Fc = mv²/r = 1000(20²)/50." }],
+    card: ["Ramp components", "mg sinθ down ramp; mg cosθ into ramp."]
   },
   {
     id: "ch6",
+    short: "Work",
     title: "Ch. 6 — Work & Energy",
-    world: "Work-Energy Arena",
     boss: "Cosine Crusher",
-    bigIdea: "Work transfers energy, and only the force component along displacement does work.",
+    bigIdea: "Work transfers energy. Only the force component along displacement does work.",
     mustKnow: ["work", "kinetic energy", "potential energy", "work-energy theorem", "power"],
-    learnDeep: [
-      "Work is energy transfer by a force over a displacement.",
-      "Only the force component along displacement does work.",
-      "Positive work adds kinetic energy; negative work removes kinetic energy.",
-      "Your homework tension problem is a classic W = Fd question."
-    ],
-    formulas: ["W = Fd cos theta", "K = 1/2mv^2", "Ug = mgh", "Wnet = delta K"],
-    traps: ["Forgetting cos theta", "Thinking every force does positive work", "Confusing work and power"],
-    examples: [
-      { q: "100 N pulls 5 m at 60 degrees. Work?", steps: "W = Fd cos theta = 100(5)cos60", a: "250 J" },
-      { q: "A 2 kg object moves at 4 m/s. Kinetic energy?", steps: "K = 1/2mv^2 = 1/2(2)(4^2)", a: "16 J" },
-      { q: "Homework: table block moves 0.750 m pulled by 12.0 N tension. Work?", steps: "W = Fd = 12(0.750)", a: "9 J" }
-    ],
-    game: { q: "A force does max positive work when it points...", choices: ["same direction as displacement", "perpendicular", "opposite displacement", "straight up always"], a: "same direction as displacement", why: "W = Fd cos theta. Max is theta = 0 degrees." },
-    card: ["Work with angle", "W = Fd cos theta."]
+    formulas: ["W = Fd cosθ", "K = 1/2mv²", "Ug = mgh", "Wnet = ΔK"],
+    traps: ["Forgetting cosθ", "Thinking every force does positive work", "Confusing work and power"],
+    examples: [{ q: "12.0 N tension moves block 0.750 m. Work?", a: "9 J", steps: "W = Fd = 12.0(0.750)." }],
+    card: ["Work with angle", "W = Fd cosθ."]
   },
   {
     id: "ch7",
+    short: "Energy",
     title: "Ch. 7 — Conservation of Energy",
-    world: "Conservation Castle",
     boss: "Friction Goblin",
     bigIdea: "Energy changes form. Friction removes mechanical energy; springs store it.",
-    mustKnow: ["energy conservation", "spring energy", "friction work", "mechanical energy", "air resistance"],
-    learnDeep: [
-      "Use energy when the problem cares about speed, height, rough patches, or springs.",
-      "Friction and air resistance do negative work and reduce mechanical energy.",
-      "At maximum spring compression, kinetic energy has become spring potential energy.",
-      "Do not use energy conservation during a sticky collision. Use momentum there."
-    ],
-    formulas: ["Ki + Ui = Kf + Uf", "Us = 1/2kx^2", "Wnc = delta E mechanical", "v = sqrt(v0^2 + 2gh)"],
-    traps: ["Conserving mechanical energy with friction", "Forgetting spring energy", "Using energy through sticky collisions"],
-    examples: [
-      { q: "Ball thrown downward at 12.0 m/s from 22.0 m. Speed before impact?", steps: "v = sqrt(12^2 + 2(9.8)(22))", a: "24 m/s" },
-      { q: "With air resistance, is final speed higher or lower?", steps: "Air resistance does negative work.", a: "lower" },
-      { q: "Spring k = 200 N/m compressed 0.10 m. Energy?", steps: "Us = 1/2kx^2", a: "1 J" }
-    ],
-    game: { q: "A rough patch does what to mechanical energy?", choices: ["removes it", "creates it", "does nothing", "turns it into momentum"], a: "removes it", why: "Friction does negative work and reduces mechanical energy." },
-    card: ["Rough patch", "Friction removes energy: Wf = mu mg d on flat ground."]
+    mustKnow: ["energy conservation", "spring energy", "friction work", "air resistance", "mechanical energy"],
+    formulas: ["Ki + Ui = Kf + Uf", "Us = 1/2kx²", "Wnc = ΔEmech", "v = √(v0² + 2gh)"],
+    traps: ["Conserving mechanical energy with friction", "Forgetting spring energy", "Using energy through a sticky collision"],
+    examples: [{ q: "Ball thrown downward 12.0 m/s from 22.0 m. Impact speed?", a: "24 m/s", steps: "v = √(12² + 2(9.8)(22))." }],
+    card: ["Energy event", "Height, speed, spring, or rough patch usually means energy."]
   },
   {
     id: "ch8",
+    short: "Momentum",
     title: "Ch. 8 — Momentum & Collisions",
-    world: "Collision Colosseum",
     boss: "Sticky Collision Beast",
     bigIdea: "Collisions, explosions, and recoil are momentum problems first.",
-    mustKnow: ["momentum", "impulse", "conservation of momentum", "elastic collisions", "inelastic collisions"],
-    learnDeep: [
-      "Momentum is mass times velocity, so direction matters.",
-      "Collisions, explosions, and recoil are momentum-first events.",
-      "Sticky collisions conserve momentum but lose kinetic energy.",
-      "Same momentum and same kinetic energy are different conditions; your SUV/truck homework tests this."
-    ],
-    formulas: ["p = mv", "J = F delta t = delta p", "momentum before = momentum after"],
+    mustKnow: ["momentum", "impulse", "elastic collision", "inelastic collision", "recoil"],
+    formulas: ["p = mv", "J = FΔt = Δp", "momentum before = momentum after"],
     traps: ["Conserving kinetic energy in sticky collisions", "Forgetting direction", "Using energy when the event screams collision"],
-    examples: [
-      { q: "10000 kg truck moves 12.0 m/s. Momentum?", steps: "p = mv = 10000(12)", a: "120000 kg m/s" },
-      { q: "2000 kg SUV has same momentum. Speed?", steps: "v = p/m = 120000/2000", a: "60 m/s" },
-      { q: "Same kinetic energy as truck. SUV speed?", steps: "Set kinetic energies equal.", a: "26.8 m/s" },
-      { q: "2 kg at 6 m/s sticks to 4 kg at rest. Final speed?", steps: "2(6) = 6V", a: "2 m/s" }
-    ],
-    game: { q: "Two carts stick together after colliding. What is conserved?", choices: ["momentum", "kinetic energy", "speed", "acceleration"], a: "momentum", why: "Sticky collisions conserve momentum, not kinetic energy." },
+    examples: [{ q: "10000 kg truck at 12.0 m/s. Momentum?", a: "120000 kg m/s", steps: "p = mv." }],
     card: ["Sticky collision", "Momentum conserved; kinetic energy not conserved."]
   },
   {
     id: "ch9",
+    short: "Rotate",
     title: "Ch. 9 — Rotational Motion",
-    world: "Rotational Ruins",
     boss: "Inertia Ogre",
     bigIdea: "Rotation mirrors linear motion, but uses radians, torque, moment of inertia, and angular acceleration.",
     mustKnow: ["radians", "arc length", "angular speed", "torque", "moment of inertia"],
-    learnDeep: [
-      "Radians connect angle to arc length through s = r theta.",
-      "Torque is rotational force: it depends on force, distance from pivot, and angle.",
-      "Moment of inertia depends on where the mass is relative to the axis.",
-      "For a disk formula, the mass is the disk's mass, not the hanging block's mass."
-    ],
-    formulas: ["s = r theta", "v = r omega", "a = r alpha", "torque = rF sin theta", "I = sum mr^2"],
-    traps: ["Forgetting radians", "Ignoring lever arm", "Using the hanging mass as the wheel mass"],
-    examples: [
-      { q: "Arc length 1.50 m, radius 2.50 m. Angle?", steps: "theta = s/r = 1.50/2.50", a: "0.6 rad" },
-      { q: "Convert 0.600 rad to degrees.", steps: "0.600 x 180/pi", a: "34.4 degrees" },
-      { q: "Masses M at 0, L/2, L from axis. I?", steps: "I = 0 + ML^2/4 + ML^2", a: "5ML^2/4" }
-    ],
-    game: { q: "Moment of inertia for point masses uses...", choices: ["sum mr^2", "mv", "Fd cos theta", "mgh"], a: "sum mr^2", why: "Each mass contributes mr^2 based on distance from axis." },
-    card: ["Point-mass inertia", "I = sum mr^2."]
+    formulas: ["s = rθ", "v = rω", "a = rα", "τ = rF sinθ", "I = Σmr²"],
+    traps: ["Forgetting radians", "Ignoring lever arm", "Using hanging mass as wheel mass"],
+    examples: [{ q: "Masses M at 0, L/2, L from axis. I?", a: "5ML²/4", steps: "I = 0 + M(L/2)² + ML²." }],
+    card: ["Point-mass inertia", "I = Σmr²."]
   },
   {
     id: "ch10",
+    short: "Torque",
     title: "Ch. 10 — Equilibrium & Angular Momentum",
-    world: "Balance Tower",
     boss: "Torque Troll",
     bigIdea: "Static equilibrium means both net force and net torque are zero.",
     mustKnow: ["static equilibrium", "torque balance", "pivot choice", "angular momentum", "parallel-axis theorem"],
-    learnDeep: [
-      "Static equilibrium means no acceleration and no angular acceleration.",
-      "Choose the pivot at an unknown force to make that force create zero torque.",
-      "Only the perpendicular component of a force creates torque.",
-      "Beam and cable questions are usually torque balance questions."
-    ],
-    formulas: ["sum F = 0", "sum torque = 0", "L = I omega", "I = Icm + Md^2"],
-    traps: ["Bad pivot choice", "Forgetting torque balance", "Using total length instead of distance from pivot"],
-    examples: [
-      { q: "10.0 N force acts 4.00 m from pivot at 90 degrees. Torque?", steps: "torque = rFsin90 = 4(10)", a: "40 N m" },
-      { q: "Where should you choose pivot in beam/cable problem?", steps: "Place it at unknown support force.", a: "At the unknown force" },
-      { q: "Static beam condition?", steps: "No linear or angular acceleration.", a: "sum F = 0 and sum torque = 0" }
-    ],
-    game: { q: "In static equilibrium, net torque equals...", choices: ["0", "ma", "mv", "mgh"], a: "0", why: "No angular acceleration means net torque is zero." },
-    card: ["Static equilibrium", "sum F = 0 and sum torque = 0."]
+    formulas: ["ΣF = 0", "Στ = 0", "L = Iω", "I = Icm + Md²"],
+    traps: ["Bad pivot choice", "Forgetting torque balance", "Using total length instead of pivot distance"],
+    examples: [{ q: "10.0 N force acts 4.00 m from pivot at 90°. Torque?", a: "40 N m", steps: "τ = rFsin90." }],
+    card: ["Static equilibrium", "ΣF = 0 and Στ = 0."]
   },
   {
     id: "ch11",
+    short: "Gravity",
     title: "Ch. 11 — Gravity & Center of Gravity",
-    world: "Orbital Outlands",
     boss: "Inverse-Square Hydra",
     bigIdea: "Gravity is inverse-square. Center of gravity is a weighted average.",
     mustKnow: ["universal gravitation", "inverse-square law", "orbits", "center of gravity", "center of mass"],
-    learnDeep: [
-      "Gravity gets weaker with the square of distance.",
-      "If distance doubles, gravity becomes one fourth as strong.",
-      "Center of gravity is a weighted average of positions.",
-      "For circular orbits, set gravity equal to centripetal force."
-    ],
-    formulas: ["Fg = Gm1m2/r^2", "g = GM/r^2", "v = sqrt(GM/r)", "xcm = sum mx / sum m"],
+    formulas: ["Fg = Gm1m2/r²", "g = GM/r²", "v = √(GM/r)", "xcm = Σmx / Σm"],
     traps: ["Forgetting inverse square", "Using altitude instead of radius", "Forgetting center of mass is weighted"],
-    examples: [
-      { q: "Distance doubles. Gravity becomes?", steps: "Gravity scales as 1/r^2.", a: "1/4 as strong" },
-      { q: "Rod mass 1.80 kg, clamp 2.40 kg, center at 1.20 m. Where is clamp?", steps: "1.20 = (1.80(1.00)+2.40x)/4.20", a: "1.35 m" },
-      { q: "Circular orbit setup?", steps: "Set gravity equal to centripetal force.", a: "GMm/r^2 = mv^2/r" }
-    ],
-    game: { q: "If distance triples, gravity becomes...", choices: ["1/9", "1/3", "3 times", "9 times"], a: "1/9", why: "Inverse-square: 1/3^2 = 1/9." },
-    card: ["Gravity scaling", "Gravity follows 1/r^2."]
+    examples: [{ q: "Distance triples. Gravity becomes?", a: "1/9", steps: "Gravity scales like 1/r²." }],
+    card: ["Gravity scaling", "Gravity follows 1/r²."]
   },
   {
     id: "ch12",
+    short: "Fluids",
     title: "Ch. 12 — Fluids",
-    world: "Fluid Dungeon",
     boss: "Buoyancy Kraken",
     bigIdea: "Fluids create pressure, buoyant forces, and flow patterns.",
     mustKnow: ["density", "pressure", "pressure with depth", "buoyancy", "continuity"],
-    learnDeep: [
-      "Pressure is force spread over area.",
-      "Fluid pressure increases with depth because more fluid is above you.",
-      "Buoyant force equals the weight of displaced fluid.",
-      "Continuity means fluid speeds up when the pipe gets narrower."
-    ],
-    formulas: ["density = m/V", "P = F/A", "P = P0 + rho gh", "Fb = rho fluid Vg", "A1v1 = A2v2"],
-    traps: ["Confusing object density and fluid density", "Forgetting pressure increases with depth", "Thinking buoyancy means gravity disappeared"],
-    examples: [
-      { q: "Water depth increases 2 m. Extra pressure?", steps: "rho gh = 1000(9.8)(2)", a: "19600 Pa" },
-      { q: "Object displaces 0.01 m^3 water. Buoyant force?", steps: "Fb = rho Vg = 1000(0.01)(9.8)", a: "98 N" }
-    ],
-    game: { q: "Buoyant force equals weight of...", choices: ["displaced fluid", "the object", "air only", "normal force"], a: "displaced fluid", why: "Archimedes' principle." },
+    formulas: ["ρ = m/V", "P = F/A", "P = P0 + ρgh", "Fb = ρfluidVg", "A1v1 = A2v2"],
+    traps: ["Confusing object density and fluid density", "Forgetting pressure increases with depth"],
+    examples: [{ q: "Object displaces 0.01 m³ water. Buoyant force?", a: "98 N", steps: "Fb = 1000(0.01)(9.8)." }],
     card: ["Buoyancy", "Buoyant force equals weight of displaced fluid."]
   },
   {
     id: "ch13",
+    short: "Waves",
     title: "Ch. 13 — Oscillations & Waves",
-    world: "Wave Temple",
     boss: "Frequency Wraith",
     bigIdea: "Oscillations repeat in time. Waves carry energy through space.",
     mustKnow: ["period", "frequency", "wave speed", "wavelength", "simple harmonic motion"],
-    learnDeep: [
-      "Period is seconds per cycle; frequency is cycles per second.",
-      "Wave speed is frequency times wavelength.",
-      "Waves carry energy, not matter all the way across.",
-      "Your astronaut gravity question is an inverse-square idea: closer means stronger acceleration."
-    ],
-    formulas: ["T = 1/f", "v = f lambda", "spring period = 2pi sqrt(m/k)", "pendulum period = 2pi sqrt(L/g)"],
+    formulas: ["T = 1/f", "v = fλ", "Tspring = 2π√(m/k)", "Tpendulum = 2π√(L/g)"],
     traps: ["Confusing period and frequency", "Ignoring Hz = 1/s", "Mixing wavelength and amplitude"],
-    examples: [
-      { q: "f = 5 Hz and lambda = 2 m. Wave speed?", steps: "v = f lambda", a: "10 m/s" },
-      { q: "Period is 0.25 s. Frequency?", steps: "f = 1/T", a: "4 Hz" },
-      { q: "Two astronauts attract each other. As they get closer, acceleration?", steps: "Gravity increases as distance decreases.", a: "increases" }
-    ],
-    game: { q: "Wave speed equation is...", choices: ["v = f lambda", "F = ma", "p = mv", "W = Fd cos theta"], a: "v = f lambda", why: "Wave speed equals frequency times wavelength." },
-    card: ["Wave speed", "v = f lambda."]
+    examples: [{ q: "f = 5 Hz and λ = 2 m. Wave speed?", a: "10 m/s", steps: "v = fλ." }],
+    card: ["Wave speed", "v = fλ."]
   },
   {
     id: "ch14",
+    short: "Sound",
     title: "Ch. 14.1–14.4 — Sound",
-    world: "Soundwave Citadel",
     boss: "Decibel Wizard",
     bigIdea: "Sound is a longitudinal mechanical wave. Decibels are logarithmic, not linear.",
     mustKnow: ["sound waves", "frequency and pitch", "intensity", "decibels", "standing waves"],
-    learnDeep: [
-      "Sound is a mechanical longitudinal wave.",
-      "Frequency relates to pitch; intensity relates to loudness.",
-      "Decibels are logarithmic, not linear.",
-      "Every 10x intensity increase is a 10 dB increase."
-    ],
-    formulas: ["beta = 10 log(I/I0)", "v = f lambda", "open pipe: fn = nv/2L", "closed pipe: fn = nv/4L for odd n"],
+    formulas: ["β = 10log(I/I0)", "v = fλ", "open pipe: fn = nv/2L", "closed pipe: fn = nv/4L for odd n"],
     traps: ["Treating dB as linear", "Confusing pitch and loudness", "Using open-pipe formula for closed pipes"],
-    examples: [
-      { q: "f = 440 Hz and lambda = 0.78 m. Speed?", steps: "v = f lambda = 440(0.78)", a: "343 m/s" },
-      { q: "Intensity increases by factor of 100. Sound level change?", steps: "100 = 10^2", a: "20 dB" }
-    ],
-    game: { q: "A 100x intensity increase changes sound level by...", choices: ["20 dB", "100 dB", "10 dB", "2 dB"], a: "20 dB", why: "Each factor of 10 gives +10 dB. 100 = 10^2, so +20 dB." },
-    card: ["Decibels", "Every 10x intensity change is 10 dB."]
+    examples: [{ q: "Intensity increases by factor of 100. Sound level change?", a: "20 dB", steps: "100 = 10², so +20 dB." }],
+    card: ["Decibels", "Every 10x intensity increase is +10 dB."]
   }
 ];
 
 const homeworkBosses = [
-  { chapter: "Ch. 6", boss: "Homework Work Wraith", q: "A table block moves 0.750 m at constant speed while a hanging block with weight 12.0 N pulls it. What work does tension do?", choices: ["9 J", "16 J", "0 J", "12 J"], a: "9 J", why: "T = 12 N. Work = Fd = 12(0.750) = 9 J." },
-  { chapter: "Ch. 7", boss: "Building Drop Demon", q: "A ball is thrown downward at 12.0 m/s from a 22.0 m building. Ignoring air resistance, impact speed?", choices: ["24 m/s", "12 m/s", "19.6 m/s", "431 m/s"], a: "24 m/s", why: "v = sqrt(12^2 + 2(9.8)(22)) = about 24 m/s." },
-  { chapter: "Ch. 8", boss: "Momentum Truck Monster", q: "A 10000 kg truck moves at 12.0 m/s. Momentum?", choices: ["120000 kg m/s", "833 kg m/s", "12000 kg m/s", "60000 kg m/s"], a: "120000 kg m/s", why: "p = mv = 10000(12.0) = 120000 kg m/s." },
-  { chapter: "Ch. 8", boss: "SUV Speed Goblin", q: "A 2000 kg SUV has the same momentum as that truck. Speed?", choices: ["60 m/s", "26.8 m/s", "12 m/s", "120 m/s"], a: "60 m/s", why: "v = p/m = 120000/2000 = 60 m/s." },
-  { chapter: "Ch. 8", boss: "Kinetic Energy Doppelganger", q: "A 2000 kg SUV has the same kinetic energy as a 10000 kg truck at 12.0 m/s. Speed?", choices: ["26.8 m/s", "60 m/s", "12 m/s", "5.4 m/s"], a: "26.8 m/s", why: "Set kinetic energies equal: v = sqrt(5 x 12^2) = 26.8 m/s." },
-  { chapter: "Ch. 9", boss: "Radian Rat", q: "Arc length is 1.50 m on radius 2.50 m. Angle in radians?", choices: ["0.600 rad", "1.67 rad", "4.00 rad", "34.4 rad"], a: "0.600 rad", why: "theta = s/r = 1.50/2.50 = 0.600 rad." },
-  { chapter: "Ch. 10", boss: "Torque Troll Homework Form", q: "A 10.0 N force acts 4.00 m from a pivot at 90 degrees. Torque?", choices: ["40 N m", "2.5 N m", "14 N m", "0 N m"], a: "40 N m", why: "Torque = rF sin theta = 4.00(10.0)sin90 = 40 N m." },
-  { chapter: "Ch. 11", boss: "Center-of-Gravity Gremlin", q: "A 2.00 m rod has mass 1.80 kg. A 2.40 kg clamp makes center of gravity 1.20 m from left. Where is clamp?", choices: ["1.35 m", "1.20 m", "1.00 m", "0.85 m"], a: "1.35 m", why: "1.20 = (1.80(1.00)+2.40x)/4.20, so x = 1.35 m." },
-  { chapter: "Ch. 13", boss: "Astronaut Gravity Phantom", q: "Two astronauts attract each other gravitationally. As they get closer, acceleration...", choices: ["increases", "decreases", "stays zero", "becomes friction"], a: "increases", why: "Gravity follows 1/r^2. Smaller distance means stronger force and greater acceleration." },
-  { chapter: "Ch. 14", boss: "Decibel Homework Wizard", q: "Sound intensity increases by factor of 100. Sound level change?", choices: ["20 dB", "10 dB", "100 dB", "2 dB"], a: "20 dB", why: "100 = 10^2, and every factor of 10 gives +10 dB." }
+  { chapter: "Ch. 3", boss: "Vector Function Wizard", q: "Given r(t) = (4.0 cm + 2.5t²)i + 5.0t j from t=0 to 2s, what is average velocity?", choices: ["5i + 5j cm/s", "10i + 5j cm/s", "5i + 10j cm/s", "14i + 10j cm/s"], a: "5i + 5j cm/s", why: "r(2)-r(0) = (10i+10j) cm. Divide by 2s." },
+  { chapter: "Ch. 3", boss: "Instant Velocity Goblin", q: "For r(t) = (4 + 2.5t²)i + 5t j, what is v(t)?", choices: ["5t i + 5 j", "2.5t i + 5 j", "5 i + 5t j", "10t i + 5 j"], a: "5t i + 5 j", why: "Velocity is derivative of position." },
+  { chapter: "Ch. 3", boss: "Parametric Path Goblin", q: "If x = 4 + 2.5t² and y = 5t, what shape is the trajectory?", choices: ["Parabola", "Circle", "Straight line", "Ellipse"], a: "Parabola", why: "Solve t=y/5, then x = 4 + 2.5(y/5)²." },
+  { chapter: "Ch. 3", boss: "Velocity Dot Acceleration Beast", q: "For v = 2.4i - 4.8j and a = -2.4j, what sign is v dot a?", choices: ["Positive", "Negative", "Zero", "Impossible"], a: "Positive", why: "v·a = (-4.8)(-2.4), so it is positive." },
+  { chapter: "Ch. 3", boss: "River Jump Boss", q: "A biker launches horizontally across a 48.0 m river, dropping 19.5 m. Minimum horizontal speed?", choices: ["24.1 m/s", "19.6 m/s", "31 m/s", "48 m/s"], a: "24.1 m/s", why: "t=√(19.5/4.9)=1.995s, then vx=48/1.995." },
+  { chapter: "Ch. 3", boss: "Landing Speed Boss", q: "Using the river jump above, what is the approximate speed before landing?", choices: ["31 m/s", "24 m/s", "19.6 m/s", "5 m/s"], a: "31 m/s", why: "vx=24.1, vy=-19.6, so speed=√(vx²+vy²)." },
+  { chapter: "Ch. 3", boss: "Angled Projectile Goblin", q: "Projectile travels 2.1 m horizontally with v0=6.4 m/s at 60°. Time to reach that x?", choices: ["0.656 s", "0.328 s", "1.53 s", "2.1 s"], a: "0.656 s", why: "v0x=6.4cos60=3.2. t=2.1/3.2." },
+  { chapter: "Ch. 3", boss: "Projectile Height Boss", q: "For v0=6.4 m/s at 60° and t=0.656s, height above launch?", choices: ["1.53 m", "0 m", "5.54 m", "-0.889 m"], a: "1.53 m", why: "y=v0y t - 4.9t²." },
+  { chapter: "Ch. 4", boss: "Normal Force Boss", q: "55 kg block accelerates upward at 9.5 m/s². Normal force?", choices: ["1061.5 N", "523 N", "55 N", "9.5 N"], a: "1061.5 N", why: "N-mg=ma, so N=m(g+a)." },
+  { chapter: "Ch. 4", boss: "Baseball Force Boss", q: "0.145 kg ball reaches 42.2 m/s in 0.020s. Average force?", choices: ["306 N", "68.8 N", "6.12 N", "2110 N"], a: "306 N", why: "Favg=mΔv/Δt." },
+  { chapter: "Ch. 6", boss: "Homework Work Wraith", q: "Tension 12.0 N moves block 0.750 m. Work?", choices: ["9 J", "16 J", "0 J", "12 J"], a: "9 J", why: "W=Fd." },
+  { chapter: "Ch. 8", boss: "Momentum Truck Monster", q: "10000 kg truck moves 12.0 m/s. Momentum?", choices: ["120000 kg m/s", "833 kg m/s", "12000 kg m/s", "60000 kg m/s"], a: "120000 kg m/s", why: "p=mv." },
+  { chapter: "Ch. 14", boss: "Decibel Wizard", q: "Sound intensity increases by factor of 100. Sound level change?", choices: ["20 dB", "10 dB", "100 dB", "2 dB"], a: "20 dB", why: "100=10², so +20 dB." }
 ];
 
 const missedTestBank = [
-  { topic: "Elastic collision", likelyMiss: "A tiny object leaves with about 2V when hit elastically by a huge mass.", drill: "Huge cart at 12 m/s elastically hits tiny cart. Tiny cart leaves at about?", answer: "24", fix: "2V = 24 m/s." },
-  { topic: "Work angle", likelyMiss: "Work depends on angle, not just force and distance.", drill: "Which does more work: horizontal pull or 60 degree upward pull?", answer: "horizontal", fix: "W = Fd cos theta, and cos0 is bigger than cos60." },
-  { topic: "Moment of inertia", likelyMiss: "Each mass has its own distance from the axis.", drill: "M at 0, L/2, and L gives what inertia?", answer: "5", fix: "I = 0 + ML^2/4 + ML^2 = 5ML^2/4." },
-  { topic: "Wheel and hanging mass", likelyMiss: "The M in disk inertia is wheel mass, not hanging mass.", drill: "In I = 1/2MR^2 for a disk, M is what mass?", answer: "wheel", fix: "Use torque and tension to find I, then solve for the wheel's mass." },
-  { topic: "Ballistic pendulum", likelyMiss: "You used energy through a sticky collision.", drill: "In a sticky collision, conserve momentum or kinetic energy?", answer: "momentum", fix: "Energy before, momentum during, energy after." },
-  { topic: "Rough patch and spring", likelyMiss: "Friction removes energy; spring compression stores remaining energy.", drill: "At max spring compression, kinetic energy becomes what?", answer: "spring", fix: "Remaining KE becomes 1/2kx^2." },
-  { topic: "Beam torque", likelyMiss: "You need the vertical component of cable tension.", drill: "Which component of cable tension supports torque against weight?", answer: "vertical", fix: "Use T sin theta in the torque equation." }
+  { topic: "Elastic collision", likelyMiss: "Tiny object leaves with about 2V when hit elastically by a huge mass.", drill: "Huge cart at 12 m/s elastically hits tiny cart. Tiny cart leaves at about?", answer: "24", fix: "2V = 24 m/s." },
+  { topic: "Work angle", likelyMiss: "Work depends on angle, not just force and distance.", drill: "Which does more work: horizontal pull or 60° upward pull?", answer: "horizontal", fix: "W = Fdcosθ, and cos0 is bigger than cos60." },
+  { topic: "Moment of inertia", likelyMiss: "Each mass has its own distance from the axis.", drill: "M at 0, L/2, and L gives what coefficient in front of ML²?", answer: "5", fix: "0 + 1/4 + 1 = 5/4." },
+  { topic: "Ballistic pendulum", likelyMiss: "Energy was used through a sticky collision.", drill: "In a sticky collision, conserve momentum or kinetic energy?", answer: "momentum", fix: "Energy before, momentum during, energy after." },
+  { topic: "Rough patch and spring", likelyMiss: "Friction removes energy; spring compression stores remaining energy.", drill: "At max spring compression, kinetic energy becomes what?", answer: "spring", fix: "Remaining KE becomes 1/2kx²." },
+  { topic: "Beam torque", likelyMiss: "Cable torque uses the vertical component of tension.", drill: "Which tension component supports torque against weight?", answer: "vertical", fix: "Use Tsinθ in the torque equation." }
 ];
 
+const botKnowledge = [
+  { keys: ["projectile", "launch", "river", "height", "horizontal"], answer: "Projectile move: split x and y. Horizontal: x = vx t. Vertical: y = y0 + v0y t - 1/2gt². Horizontal launch means v0y = 0." },
+  { keys: ["vector", "component", "angle", "resultant"], answer: "Vector move: if angle is from horizontal, x = A cosθ and y = A sinθ. Resultant = √(x²+y²)." },
+  { keys: ["force", "newton", "free body", "fbd", "normal"], answer: "Newton move: draw the FBD. Only forces go on it. Then write ΣF = ma in x and y." },
+  { keys: ["friction", "rough", "patch"], answer: "Rough patch move: friction does negative work. On flat ground, Wfriction = -μmgd." },
+  { keys: ["spring", "compression", "k"], answer: "Spring move: use Us = 1/2kx². At maximum compression, velocity is zero." },
+  { keys: ["collision", "stick", "inelastic", "momentum"], answer: "Collision move: conserve momentum during the collision. If objects stick, kinetic energy is not conserved." },
+  { keys: ["torque", "beam", "cable", "pivot"], answer: "Torque move: choose the pivot at an unknown force. Use τ = rFsinθ and Στ = 0." },
+  { keys: ["circle", "circular", "centripetal", "radial"], answer: "Circular motion move: inward acceleration is ac = v²/r or ac = ω²r. If period is given, ω = 2π/T." },
+  { keys: ["sound", "wave", "frequency", "wavelength", "decibel"], answer: "Wave/sound move: v = fλ and T = 1/f. Decibels are logarithmic: every 10x intensity increase is +10 dB." },
+  { keys: ["unit", "convert", "dimensional"], answer: "Unit move: write conversions as fractions and cancel units. The final unit should match what the problem asks for." }
+];
+
+const tabs = ["game", "learn", "missed", "cards", "bot"];
 const lootItems = ["Formula Sword", "Unit Shield", "Momentum Gauntlet", "Torque Hammer", "Energy Potion", "Wave Wand", "Free-Body Armor", "Decibel Cloak", "Gravity Boots", "Spring Launcher"];
-const hypeLines = ["Your calculator just saluted you.", "The physics gods saw that and nodded.", "Final exam monster took emotional damage.", "You are becoming dangerously hard to trick.", "Somewhere, Newton dropped a mixtape."];
-const tabs = ["game", "learn", "missed", "cards"];
+const hypeLines = ["Your calculator just saluted you.", "Final exam monster took emotional damage.", "You are becoming dangerously hard to trick.", "Newton would give that a thumbs-up."];
 
 function clean(text) {
   return String(text).toLowerCase().trim();
 }
 
-function isCorrect(userText, answerText) {
-  const user = clean(userText);
-  const answer = clean(answerText);
-  return Boolean(user) && (user.includes(answer) || answer.includes(user));
+function askPhysicsBot(question) {
+  const q = clean(question);
+  const hit = botKnowledge.find((item) => item.keys.some((key) => q.includes(key)));
+  if (hit) return hit.answer;
+  return "First move: identify the event. Is it force, energy, momentum, torque, circular motion, projectile motion, gravity, fluids, or waves? Send the known values and what the problem asks for.";
 }
 
-function Panel({ title, children, tone = "blue" }) {
-  return <section className={`panel ${tone}`}><h2>{title}</h2>{children}</section>;
+function CardShell({ children, tone = "slate" }) {
+  return <section className={`card-shell ${tone}`}>{children}</section>;
 }
 
-function ProgressBar({ value }) {
-  return <div className="progress" aria-label={`Chapter mastery ${value}%`}><div style={{ width: `${value}%` }} /></div>;
+function TinyPill({ children, tone = "cyan" }) {
+  return <span className={`tiny-pill ${tone}`}>{children}</span>;
 }
 
-const appStyles = `
+function ActionButton({ children, onClick, active = false, variant = "dark", type = "button" }) {
+  return (
+    <button type={type} onClick={onClick} className={`action-button ${active ? "active" : ""} ${variant === "primary" ? "primary" : ""}`}>
+      {children}
+    </button>
+  );
+}
+
+function SectionTitle({ eyebrow, title, subtitle }) {
+  return (
+    <div className="section-header">
+      {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+      <h2>{title}</h2>
+      {subtitle ? <p>{subtitle}</p> : null}
+    </div>
+  );
+}
+
+const styles = `
+  :root { color-scheme: dark; }
   * { box-sizing: border-box; }
   body { margin: 0; background: #020617; }
   button, input { font: inherit; }
   button { cursor: pointer; }
-  .app-shell { min-height: 100vh; padding: 18px; color: #f8fafc; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: radial-gradient(circle at top left, rgba(34,211,238,.2), transparent 30%), radial-gradient(circle at 85% 10%, rgba(192,132,252,.18), transparent 28%), radial-gradient(circle at bottom right, rgba(52,211,153,.14), transparent 30%), #020617; }
-  .hero, .panel, .chapter-list { border: 1px solid rgba(255,255,255,.12); border-radius: 28px; background: rgba(15,23,42,.88); box-shadow: 0 20px 58px rgba(0,0,0,.3); }
-  .hero { max-width: 1120px; margin: 0 auto 14px; padding: 22px; background: linear-gradient(135deg, rgba(15,23,42,.94), rgba(30,41,59,.76)); }
-  .hero h1 { margin: 16px 0 10px; max-width: 880px; font-size: clamp(2.35rem, 8vw, 5.25rem); line-height: .88; letter-spacing: -.065em; }
-  .hero p { max-width: 760px; margin: 0; color: #cbd5e1; font-size: 1.04rem; line-height: 1.65; }
-  .tiny { margin-top: 10px !important; font-size: .9rem !important; color: #94a3b8 !important; }
-  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .pill-row span, .chapter-chip { display: inline-flex; align-items: center; width: fit-content; border: 1px solid rgba(34,211,238,.20); border-radius: 999px; padding: 7px 11px; background: rgba(8,145,178,.14); color: #a5f3fc; font-size: .85rem; font-weight: 800; }
-  .lootbar { margin-top: 12px; border: 1px solid rgba(251,191,36,.20); border-radius: 18px; padding: 10px 12px; background: rgba(120,53,15,.22); color: #fde68a; line-height: 1.45; }
-  .progress { height: 14px; width: 100%; margin-top: 18px; overflow: hidden; border-radius: 999px; background: rgba(15,23,42,.92); border: 1px solid rgba(255,255,255,.10); }
-  .progress > div { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #22d3ee, #34d399, #fbbf24); transition: width .22s ease; }
-  .tabbar { position: sticky; top: 0; z-index: 20; max-width: 1120px; margin: 0 auto 14px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; padding: 10px; border: 1px solid rgba(255,255,255,.10); border-radius: 24px; background: rgba(2,6,23,.82); backdrop-filter: blur(14px); }
-  .tabbar button { min-height: 48px; border: 0; border-radius: 17px; background: rgba(30,41,59,.92); color: #e2e8f0; font-weight: 950; text-transform: capitalize; transition: transform .15s ease, background .15s ease; }
-  .tabbar button:hover { transform: translateY(-1px); background: rgba(51,65,85,.94); }
-  .tabbar button.active { background: linear-gradient(135deg, #22d3ee, #34d399); color: #020617; box-shadow: 0 10px 28px rgba(34,211,238,.22); }
-  .single, .layout { max-width: 1120px; margin: 0 auto; display: grid; gap: 14px; }
-  .layout { grid-template-columns: 340px minmax(0,1fr); align-items: start; }
-  .stack { display: grid; gap: 14px; }
-  .panel { padding: 18px; }
-  .panel h2 { margin: 0 0 12px; font-size: clamp(1.35rem, 4vw, 2rem); line-height: 1.05; letter-spacing: -.03em; }
-  .panel h3 { margin: 14px 0 12px; font-size: 1.35rem; line-height: 1.25; }
-  .panel p, .panel li { color: #e2e8f0; line-height: 1.58; }
-  .panel ul { margin: 8px 0 0; padding-left: 22px; }
-  .panel.blue { border-color: rgba(34,211,238,.22); }
-  .panel.green { border-color: rgba(52,211,153,.24); background: linear-gradient(135deg, rgba(6,78,59,.30), rgba(15,23,42,.88)); }
-  .panel.amber { border-color: rgba(251,191,36,.25); background: linear-gradient(135deg, rgba(120,53,15,.30), rgba(15,23,42,.88)); }
-  .panel.rose { border-color: rgba(251,113,133,.27); background: linear-gradient(135deg, rgba(127,29,29,.32), rgba(15,23,42,.88)); }
-  .mode-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .mode { border: 1px solid rgba(255,255,255,.14); border-radius: 999px; padding: 9px 11px; background: rgba(2,6,23,.70); color: white; font-weight: 850; }
-  .mode.active { background: #22d3ee; color: #020617; }
-  .choices { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin: 14px 0; }
-  .choices button, .primary, .answer-row button, .flashcard, .chapter { border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 13px 14px; background: rgba(2,6,23,.70); color: white; font-weight: 850; transition: transform .14s ease, border-color .14s ease, background .14s ease; }
-  .choices button:hover, .answer-row button:hover, .chapter:hover, .primary:hover, .flashcard:hover { transform: translateY(-1px); border-color: rgba(34,211,238,.55); background: rgba(30,41,59,.95); }
-  .primary { width: 100%; margin-top: 12px; background: linear-gradient(135deg, #22d3ee, #34d399); color: #020617; border: 0; font-weight: 950; }
-  .feedback { margin-top: 12px; border-radius: 18px; padding: 14px; line-height: 1.55; font-weight: 760; }
-  .feedback.win { border: 1px solid rgba(52,211,153,.30); background: rgba(6,78,59,.38); color: #d1fae5; }
-  .feedback.lose { border: 1px solid rgba(251,191,36,.28); background: rgba(120,53,15,.36); color: #fef3c7; }
-  .chapter-list { max-height: 72vh; overflow: auto; display: grid; gap: 9px; padding: 12px; }
-  .chapter { text-align: left; display: grid; gap: 5px; }
-  .chapter.selected { border-color: #22d3ee; background: rgba(8,145,178,.18); }
-  .chapter small { color: #94a3b8; font-weight: 700; }
-  .content { min-width: 0; }
-  code { display: block; margin: 8px 0; padding: 11px 12px; border-radius: 14px; background: rgba(2,6,23,.74); color: #fef3c7; white-space: normal; }
-  .card { margin-top: 10px; border: 1px solid rgba(255,255,255,.10); border-radius: 20px; padding: 14px; background: rgba(2,6,23,.52); }
-  .card h3 { margin-top: 0; }
-  .answer-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 10px; margin-top: 14px; }
-  input { width: 100%; border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 13px 14px; background: rgba(2,6,23,.80); color: white; outline: none; }
-  input:focus { border-color: #22d3ee; box-shadow: 0 0 0 3px rgba(34,211,238,.12); }
-  .flashcard { width: 100%; min-height: 220px; display: grid; place-items: center; text-align: center; font-size: clamp(1.35rem, 5vw, 2.25rem); line-height: 1.18; background: linear-gradient(135deg, rgba(14,165,233,.18), rgba(168,85,247,.16)); }
-  @media (max-width: 860px) { .app-shell { padding: 12px; } .hero { border-radius: 24px; padding: 18px; } .tabbar { grid-template-columns: repeat(4, minmax(92px,1fr)); overflow-x: auto; } .layout { grid-template-columns: 1fr; } .chapter-list { max-height: 250px; } .choices { grid-template-columns: 1fr; } .answer-row { grid-template-columns: 1fr; } .panel { border-radius: 22px; padding: 16px; } }
+  .app { min-height: 100vh; padding: 16px; color: #f8fafc; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: radial-gradient(circle at top left, rgba(34,211,238,.20), transparent 30%), radial-gradient(circle at 90% 10%, rgba(168,85,247,.16), transparent 26%), #020617; }
+  .app-inner { max-width: 980px; margin: 0 auto; }
+  .hero { border: 1px solid rgba(148,163,184,.18); border-radius: 30px; background: linear-gradient(135deg, rgba(17,24,39,.96), rgba(15,23,42,.88)); padding: 20px; margin-bottom: 14px; box-shadow: 0 24px 70px rgba(0,0,0,.35); }
+  .hero-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+  .app-kicker, .eyebrow { color: #67e8f9; text-transform: uppercase; font-size: 12px; font-weight: 950; letter-spacing: 1.2px; margin: 0 0 4px; }
+  h1 { margin: 0; font-size: clamp(2.7rem, 9vw, 5.2rem); line-height: .92; letter-spacing: -.07em; }
+  .subtitle, .section-header p { color: #cbd5e1; font-size: 15px; line-height: 1.55; }
+  .heart-badge { border: 1px solid rgba(248,113,113,.3); background: #020617; border-radius: 18px; padding: 8px 10px; color: #fecaca; font-weight: 950; white-space: nowrap; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+  .stat-box { border: 1px solid rgba(148,163,184,.14); background: rgba(2,6,23,.55); border-radius: 18px; padding: 12px; }
+  .stat-num { display: block; font-size: 22px; font-weight: 950; }
+  .stat-label { color: #94a3b8; font-size: 12px; font-weight: 850; }
+  .progress-track { height: 12px; border-radius: 999px; background: #020617; margin-top: 15px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #22d3ee, #34d399, #fbbf24); border-radius: 999px; }
+  .loot { color: #fde68a; margin: 10px 0 0; line-height: 1.4; font-weight: 750; }
+  .tabs { position: sticky; top: 0; z-index: 3; display: flex; gap: 8px; overflow-x: auto; padding: 8px 0 14px; background: linear-gradient(#020617, rgba(2,6,23,.78)); backdrop-filter: blur(12px); }
+  .tab-button { border: 1px solid rgba(148,163,184,.18); border-radius: 999px; padding: 11px 16px; background: #0f172a; color: #cbd5e1; font-weight: 950; text-transform: capitalize; }
+  .tab-button.active { background: #22d3ee; border-color: #22d3ee; color: #020617; }
+  .section-header { margin: 8px 0 10px; }
+  .section-header h2 { margin: 0; font-size: clamp(1.9rem, 7vw, 3rem); line-height: 1.02; letter-spacing: -.055em; }
+  .card-shell { border: 1px solid rgba(148,163,184,.18); border-radius: 24px; padding: 16px; margin-bottom: 12px; background: rgba(15,23,42,.96); box-shadow: 0 16px 40px rgba(0,0,0,.22); }
+  .card-shell.blue { border-color: rgba(34,211,238,.28); }
+  .card-shell.green { border-color: rgba(52,211,153,.30); }
+  .card-shell.amber { border-color: rgba(251,191,36,.30); }
+  .card-shell.rose { border-color: rgba(251,113,133,.30); }
+  .tiny-pill { display: inline-flex; border-radius: 999px; padding: 6px 10px; margin-bottom: 10px; color: #a5f3fc; background: rgba(34,211,238,.16); font-size: 12px; font-weight: 950; }
+  .tiny-pill.green { background: rgba(52,211,153,.16); color: #bbf7d0; }
+  .card-title { color: #f8fafc; font-size: 20px; line-height: 1.25; font-weight: 950; margin: 0 0 8px; }
+  .body, .bullet { color: #dbeafe; font-size: 15px; line-height: 1.55; margin: 6px 0; }
+  .question { color: #f8fafc; font-size: 19px; line-height: 1.34; font-weight: 950; margin: 8px 0; }
+  .answer { color: #bbf7d0; font-weight: 950; line-height: 1.45; }
+  .formula { display: block; color: #fde68a; background: #020617; padding: 11px; border-radius: 14px; margin: 6px 0; font-weight: 950; }
+  .example-box { background: rgba(2,6,23,.55); border-radius: 18px; padding: 12px; margin-top: 8px; }
+  .segmented { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .action-button { border: 1px solid rgba(148,163,184,.18); border-radius: 16px; padding: 12px 14px; background: rgba(2,6,23,.82); color: #f8fafc; font-weight: 950; margin: 8px 8px 0 0; transition: transform .14s ease, border-color .14s ease, background .14s ease; }
+  .action-button:hover { transform: translateY(-1px); border-color: rgba(34,211,238,.45); }
+  .action-button.active { background: #22d3ee; border-color: #22d3ee; color: #020617; }
+  .action-button.primary { background: #34d399; border-color: #34d399; color: #020617; }
+  .feedback { border-radius: 16px; padding: 12px; margin: 10px 0; line-height: 1.5; font-weight: 750; }
+  .feedback.win { color: #d1fae5; background: rgba(6,78,59,.55); }
+  .feedback.lose { color: #fef3c7; background: rgba(120,53,15,.50); }
+  .chapter-scroller { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; }
+  .input { width: 100%; border: 1px solid rgba(148,163,184,.22); border-radius: 18px; padding: 14px; background: #020617; color: #f8fafc; margin-top: 10px; outline: none; }
+  .input:focus { border-color: #22d3ee; box-shadow: 0 0 0 4px rgba(34,211,238,.12); }
+  .flashcard { min-height: 250px; width: 100%; border: 1px solid rgba(34,211,238,.35); border-radius: 28px; padding: 22px; background: rgba(14,165,233,.16); display: grid; place-items: center; margin-bottom: 12px; }
+  .flash-label { color: #67e8f9; font-size: 12px; font-weight: 950; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; text-align: center; }
+  .flash-text { color: #f8fafc; font-size: clamp(1.7rem, 7vw, 2.5rem); font-weight: 950; text-align: center; line-height: 1.15; }
+  .chat { border-radius: 18px; padding: 12px; margin: 6px 0; line-height: 1.5; }
+  .chat.bot { color: #d1fae5; background: rgba(6,78,59,.45); }
+  .chat.user { color: #cffafe; background: rgba(8,145,178,.40); }
+  @media (min-width: 780px) { .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .card-shell { padding: 20px; } }
+  @media (max-width: 420px) { .app { padding: 10px; } .hero { border-radius: 24px; padding: 16px; } .stats-grid { grid-template-columns: 1fr 1fr 1fr; } .action-button { width: 100%; margin-right: 0; } .segmented .action-button { width: auto; } }
 `;
 
 export default function PhysicsFinalBossStudyGame() {
   const [tab, setTab] = useState("game");
-  const [selectedId, setSelectedId] = useState("ch6");
+  const [selectedId, setSelectedId] = useState("ch3");
   const [questionIndex, setQuestionIndex] = useState(0);
   const [gameMode, setGameMode] = useState("mixed");
   const [missedIndex, setMissedIndex] = useState(0);
@@ -436,25 +331,41 @@ export default function PhysicsFinalBossStudyGame() {
   const [hearts, setHearts] = useState(5);
   const [cleared, setCleared] = useState({});
   const [inventory, setInventory] = useState([]);
-  const [comboName, setComboName] = useState("Baby Physics Goblin");
+  const [botInput, setBotInput] = useState("");
+  const [botMessages, setBotMessages] = useState([{ who: "bot", text: "Ask me a physics question. I can help identify the event and formula." }]);
 
   const selected = chapters.find((c) => c.id === selectedId) || chapters[0];
-  const mixedBattles = useMemo(() => {
-    const chapterBattles = chapters.map((chapter) => ({ source: "chapter", chapterId: chapter.id, chapter: chapter.title, boss: chapter.boss, world: chapter.world, ...chapter.game }));
-    const homeworkBattles = homeworkBosses.map((boss) => ({ source: "homework", chapter: boss.chapter, boss: boss.boss, world: "Homework Dungeon", q: boss.q, choices: boss.choices, a: boss.a, why: boss.why }));
+
+  const battles = useMemo(() => {
+    const chapterBattles = chapters.map((chapter) => ({
+      source: "chapter",
+      chapterId: chapter.id,
+      chapter: chapter.title,
+      boss: chapter.boss,
+      world: chapter.short,
+      q: chapter.examples[0].q,
+      choices: [chapter.examples[0].a, chapter.traps[0], chapter.formulas[0], chapter.mustKnow[0]],
+      a: chapter.examples[0].a,
+      why: chapter.examples[0].steps
+    }));
+    const homeworkBattles = homeworkBosses.map((boss) => ({ source: "homework", world: "Homework", ...boss }));
     if (gameMode === "homework") return homeworkBattles;
     if (gameMode === "chapters") return chapterBattles;
-    return chapterBattles.concat(homeworkBattles);
+    return homeworkBattles.concat(chapterBattles);
   }, [gameMode]);
-  const gameQuestion = mixedBattles[questionIndex % mixedBattles.length];
+
+  const gameQuestion = battles[questionIndex % battles.length];
   const missed = missedTestBank[missedIndex];
   const allCards = useMemo(() => chapters.map((c) => c.card).concat([
-    ["First move on any problem", "Picture, knowns, unknown, event, formula, units."],
+    ["First move", "Draw or imagine the situation. Write knowns, unknown, event type, formula, units."],
     ["Event map", "Collision = momentum. Rough patch = friction work. Spring = spring energy. Beam = torque."],
-    ["Final exam rule", "Identify the event before choosing the formula."]
+    ["Projectile checklist", "Find time from vertical motion, then solve horizontal motion."],
+    ["Newton checklist", "Draw FBD, choose axes, write ΣF = ma."],
+    ["Circular motion", "ac = v²/r = ω²r, and ω = 2π/T."]
   ]), []);
+
   const progress = Math.round((Object.keys(cleared).length / chapters.length) * 100);
-  const currentLoot = inventory.slice(-5);
+  const currentLoot = inventory.slice(-3);
 
   function earnLoot() {
     const item = lootItems[Math.floor(Math.random() * lootItems.length)];
@@ -462,28 +373,17 @@ export default function PhysicsFinalBossStudyGame() {
     return item;
   }
 
-  function updateCombo(nextStreak) {
-    if (nextStreak >= 10) setComboName("Final Boss Menace");
-    else if (nextStreak >= 7) setComboName("Formula Assassin");
-    else if (nextStreak >= 4) setComboName("Physics Goblin Slayer");
-    else if (nextStreak >= 2) setComboName("Concept Goblin");
-    else setComboName("Baby Physics Goblin");
-  }
-
   function choose(choice) {
     if (choice === gameQuestion.a) {
       const loot = earnLoot();
-      const nextStreak = streak + 1;
-      updateCombo(nextStreak);
       const hype = hypeLines[Math.floor(Math.random() * hypeLines.length)];
-      setResult({ kind: "win", text: `Critical hit. ${gameQuestion.why} Loot gained: ${loot}. ${hype}` });
+      setResult({ kind: "win", text: `Correct. ${gameQuestion.why} Loot gained: ${loot}. ${hype}` });
       setXp((v) => v + 25 + streak * 3);
-      setStreak(nextStreak);
+      setStreak((s) => s + 1);
       if (gameQuestion.source === "chapter") setCleared((old) => ({ ...old, [gameQuestion.chapterId]: true }));
     } else {
-      setResult({ kind: "lose", text: `Trap hit. Correct answer: ${gameQuestion.a}. ${gameQuestion.why} The boss got one hit in, but now you know its weakness.` });
+      setResult({ kind: "lose", text: `Not this one. Correct answer: ${gameQuestion.a}. ${gameQuestion.why}` });
       setStreak(0);
-      setComboName("Baby Physics Goblin");
       setHearts((h) => Math.max(0, h - 1));
     }
   }
@@ -494,17 +394,16 @@ export default function PhysicsFinalBossStudyGame() {
   }
 
   function checkMissed() {
-    if (isCorrect(answer, missed.answer)) {
+    const user = clean(answer);
+    const right = clean(missed.answer);
+    if (user && (user.includes(right) || right.includes(user))) {
       const loot = earnLoot();
-      const nextStreak = streak + 1;
-      updateCombo(nextStreak);
       setResult({ kind: "win", text: `Comeback complete. ${missed.fix} Loot gained: ${loot}.` });
       setXp((v) => v + 40);
-      setStreak(nextStreak);
+      setStreak((s) => s + 1);
     } else {
-      setResult({ kind: "lose", text: `Target answer: ${missed.answer}. ${missed.fix} This is not failure; this is boss intel.` });
+      setResult({ kind: "lose", text: `Target answer: ${missed.answer}. ${missed.fix}` });
       setStreak(0);
-      setComboName("Baby Physics Goblin");
       setHearts((h) => Math.max(0, h - 1));
     }
   }
@@ -515,103 +414,123 @@ export default function PhysicsFinalBossStudyGame() {
     setResult(null);
   }
 
-  function clearChapter() {
-    setCleared((old) => ({ ...old, [selected.id]: true }));
-    setXp((v) => v + selected.xp);
+  function sendBotQuestion() {
+    if (!botInput.trim()) return;
+    const userText = botInput;
+    const reply = askPhysicsBot(userText);
+    setBotMessages((old) => [...old, { who: "user", text: userText }, { who: "bot", text: reply }]);
+    setBotInput("");
   }
 
   return (
-    <div className="app-shell">
-      <style>{appStyles}</style>
-      <header className="hero">
-        <div className="pill-row"><span>🎮 Physics 1 Final Boss</span><span>XP {xp}</span><span>🔥 Streak {streak}</span><span>❤️ {hearts}</span><span>🧙 {comboName}</span></div>
-        <h1>Physics 1 Final Boss Study Game</h1>
-        <p>Four modes. One mission: recognize the physics event, pick the right formula, and destroy the final.</p>
-        <ProgressBar value={progress} />
-        <p className="tiny">Chapter mastery: {Object.keys(cleared).length}/{chapters.length}</p>
-        {currentLoot.length > 0 && <div className="lootbar"><b>Recent loot:</b> {currentLoot.join(" • ")}</div>}
-      </header>
-
-      <nav className="tabbar">{tabs.map((t) => <button key={t} onClick={() => { setTab(t); setResult(null); }} className={tab === t ? "active" : ""}>{t}</button>)}</nav>
-
-      {tab === "game" && (
-        <main className="single">
-          <Panel title={`Battle: ${gameQuestion.boss}`} tone="green">
-            <div className="mode-row">
-              <button onClick={() => { setGameMode("mixed"); setQuestionIndex(0); setResult(null); }} className={gameMode === "mixed" ? "mode active" : "mode"}>Mixed Final</button>
-              <button onClick={() => { setGameMode("homework"); setQuestionIndex(0); setResult(null); }} className={gameMode === "homework" ? "mode active" : "mode"}>Homework Bosses</button>
-              <button onClick={() => { setGameMode("chapters"); setQuestionIndex(0); setResult(null); }} className={gameMode === "chapters" ? "mode active" : "mode"}>Chapter Battles</button>
+    <div className="app">
+      <style>{styles}</style>
+      <div className="app-inner">
+        <header className="hero">
+          <div className="hero-top">
+            <div>
+              <p className="app-kicker">Physics 1 Final Boss</p>
+              <h1>Study Game</h1>
             </div>
-            <div className="chapter-chip">{gameQuestion.chapter} • {gameQuestion.world}</div>
-            <h3>{gameQuestion.q}</h3>
-            <div className="choices">{gameQuestion.choices.map((choice) => <button key={choice} onClick={() => choose(choice)}>{choice}</button>)}</div>
-            {result && <div className={`feedback ${result.kind}`}>{result.text}</div>}
-            <button className="primary" onClick={nextGame}>Next Battle</button>
-          </Panel>
-          <Panel title="How to win the game" tone="blue">
-            <p>Do not memorize randomly. Identify the event first:</p>
-            <ul>
-              <li><b>Collision, explosion, recoil</b> → momentum</li>
-              <li><b>Ramp, friction, free-body diagram</b> → Newton's laws</li>
-              <li><b>Height, speed, spring, rough patch</b> → energy</li>
-              <li><b>Beam, door, cable, pivot</b> → torque</li>
-              <li><b>Frequency, wavelength, sound</b> → waves</li>
-              <li><b>Arc length or spinning wheel</b> → radians and rotation</li>
-            </ul>
-          </Panel>
-        </main>
-      )}
+            <div className="heart-badge">❤️ {hearts}</div>
+          </div>
+          <p className="subtitle">Boss battles, flashcards, missed-test drills, and a formula bot built for your final.</p>
+          <div className="stats-grid">
+            <div className="stat-box"><span className="stat-num">{xp}</span><span className="stat-label">XP</span></div>
+            <div className="stat-box"><span className="stat-num">{streak}</span><span className="stat-label">Streak</span></div>
+            <div className="stat-box"><span className="stat-num">{progress}%</span><span className="stat-label">Mastery</span></div>
+          </div>
+          <div className="progress-track"><div className="progress-fill" style={{ width: `${progress}%` }} /></div>
+          {currentLoot.length > 0 ? <p className="loot">Loot: {currentLoot.join(" • ")}</p> : null}
+        </header>
 
-      {tab === "learn" && (
-        <main className="layout">
-          <aside className="chapter-list">
-            {chapters.map((c) => <button key={c.id} onClick={() => setSelectedId(c.id)} className={selected.id === c.id ? "chapter selected" : "chapter"}><strong>{c.title}</strong><small>{c.world}</small></button>)}
-          </aside>
-          <section className="content stack">
-            <Panel title={selected.title} tone="blue"><p>{selected.bigIdea}</p><div className="chapter-chip">Boss: {selected.boss}</div></Panel>
-            <Panel title="Must Know" tone="green"><ul>{selected.mustKnow.map((k) => <li key={k}>{k}</li>)}</ul></Panel>
-            <Panel title="Learn Deep" tone="amber"><ul>{selected.learnDeep.map((d) => <li key={d}>{d}</li>)}</ul></Panel>
-            <Panel title="Formulas" tone="rose"><ul>{selected.formulas.map((f) => <li key={f}><code>{f}</code></li>)}</ul></Panel>
-            <Panel title="Traps" tone="red"><ul>{selected.traps.map((t) => <li key={t}>{t}</li>)}</ul></Panel>
-            <Panel title="Examples" tone="green">{selected.examples.map((ex, i) => <div key={i} className="example"><h3>Example: {ex.q}</h3><p><em>Solution:</em> {ex.steps} <strong>{ex.a}</strong></p></div>)}</Panel>
-            {selected.game && <Panel title="Game Question Explained" tone="amber"><p><strong>Question:</strong> {selected.game.q}</p><div className="choices">{selected.game.choices.map((choice) => <button key={choice} disabled>{choice}</button>)}</div><p><strong>Answer:</strong> {selected.game.a}</p><p><strong>Why:</strong> {selected.game.why}</p></Panel>}
-            {selected.card && <Panel title="Flashcard" tone="blue"><div className="card"><h3>{selected.card[0]}</h3><p>{selected.card[1]}</p></div></Panel>}
-          </section>
-        </main>
-      )}
+        <nav className="tabs">
+          {tabs.map((t) => (
+            <button key={t} onClick={() => { setTab(t); setResult(null); }} className={`tab-button ${tab === t ? "active" : ""}`}>{t}</button>
+          ))}
+        </nav>
 
-      {tab === "missed" && (
-        <main className="single">
-          <Panel title={`Missed Concept: ${missed.topic}`} tone="rose">
-            <h3>{missed.likelyMiss}</h3>
-            <p><em>Drill:</em> {missed.drill}</p>
-            <div className="answer-row">
-              <input value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Your answer" />
-              <button onClick={checkMissed}>Check</button>
+        {tab === "game" && (
+          <main>
+            <SectionTitle eyebrow="Battle Mode" title={gameQuestion.boss} subtitle={`${gameQuestion.chapter} • ${gameQuestion.world}`} />
+            <div className="segmented">
+              <ActionButton active={gameMode === "mixed"} onClick={() => { setGameMode("mixed"); setQuestionIndex(0); setResult(null); }}>Mixed</ActionButton>
+              <ActionButton active={gameMode === "homework"} onClick={() => { setGameMode("homework"); setQuestionIndex(0); setResult(null); }}>Homework</ActionButton>
+              <ActionButton active={gameMode === "chapters"} onClick={() => { setGameMode("chapters"); setQuestionIndex(0); setResult(null); }}>Chapters</ActionButton>
             </div>
-            {result && <div className={`feedback ${result.kind}`}>{result.text}</div>}
-            <button className="primary" onClick={nextMissed}>Next Missed Concept</button>
-          </Panel>
-        </main>
-      )}
+            <CardShell tone="green">
+              <TinyPill tone="green">Boss Question</TinyPill>
+              <p className="question">{gameQuestion.q}</p>
+              {gameQuestion.choices.map((choice) => <ActionButton key={choice} onClick={() => choose(choice)}>{choice}</ActionButton>)}
+              {result ? <p className={`feedback ${result.kind}`}>{result.text}</p> : null}
+              <ActionButton variant="primary" onClick={nextGame}>Next Battle</ActionButton>
+            </CardShell>
+            <CardShell tone="blue">
+              <p className="card-title">Final Exam Event Map</p>
+              {["Collision/recoil → momentum", "Ramp/friction/FBD → Newton", "Height/spring/rough patch → energy", "Beam/cable/pivot → torque", "Sound/frequency/wavelength → waves"].map((x) => <p key={x} className="bullet">• {x}</p>)}
+            </CardShell>
+          </main>
+        )}
 
-      {tab === "cards" && (
-        <main className="single">
-          <Panel title="Flashcards" tone="blue">
-            <div className="mode-row">
-              <button onClick={() => { setCardIndex(0); setFlipped(false); }} className={cardIndex === 0 ? "mode active" : "mode"}>Chapter Cards</button>
-              <button onClick={() => { setCardIndex(chapters.length); setFlipped(false); }} className={cardIndex === chapters.length ? "mode active" : "mode"}>General Strategy</button>
+        {tab === "learn" && (
+          <main>
+            <SectionTitle eyebrow="Learn Mode" title={selected.short} subtitle={selected.title} />
+            <div className="chapter-scroller">
+              {chapters.map((c) => <ActionButton key={c.id} active={selected.id === c.id} onClick={() => setSelectedId(c.id)}>{c.id.toUpperCase()}</ActionButton>)}
             </div>
-            <div className="flashcard" onClick={() => setFlipped((f) => !f)}>
-              {!flipped ? allCards[cardIndex][0] : allCards[cardIndex][1]}
+            <div className="two-col">
+              <CardShell tone="blue"><p className="card-title">{selected.boss}</p><p className="body">{selected.bigIdea}</p></CardShell>
+              <CardShell tone="green"><p className="card-title">Must Know</p>{selected.mustKnow.map((x) => <p key={x} className="bullet">• {x}</p>)}</CardShell>
             </div>
-            <div className="choices">
-              <button onClick={() => { setCardIndex((i) => Math.max(0, i - 1)); setFlipped(false); }} disabled={cardIndex === 0}>Previous</button>
-              <button onClick={() => { setCardIndex((i) => Math.min(allCards.length - 1, i + 1)); setFlipped(false); }} disabled={cardIndex === allCards.length - 1}>Next</button>
+            <CardShell tone="amber"><p className="card-title">Formula Vault</p>{selected.formulas.map((x) => <code key={x} className="formula">{x}</code>)}</CardShell>
+            <CardShell tone="rose"><p className="card-title">Traps</p>{selected.traps.map((x) => <p key={x} className="bullet">⚠ {x}</p>)}</CardShell>
+            <CardShell tone="green"><p className="card-title">Examples</p>{selected.examples.map((ex) => <div key={ex.q} className="example-box"><p className="question">{ex.q}</p><p className="body">Steps: {ex.steps}</p><p className="answer">Answer: {ex.a}</p></div>)}</CardShell>
+            <ActionButton variant="primary" onClick={() => { setCleared((old) => ({ ...old, [selected.id]: true })); setXp((v) => v + 50); }}>I can teach this chapter</ActionButton>
+          </main>
+        )}
+
+        {tab === "missed" && (
+          <main>
+            <SectionTitle eyebrow="Comeback Mode" title={missed.topic} subtitle="These are the old-test traps that steal points." />
+            <CardShell tone="rose">
+              <p className="body">Likely miss: {missed.likelyMiss}</p>
+              <p className="question">{missed.drill}</p>
+              <input className="input" value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Type your answer" />
+              <ActionButton variant="primary" onClick={checkMissed}>Check</ActionButton>
+              {result ? <p className={`feedback ${result.kind}`}>{result.text}</p> : null}
+              <ActionButton onClick={nextMissed}>Next Drill</ActionButton>
+            </CardShell>
+          </main>
+        )}
+
+        {tab === "cards" && (
+          <main>
+            <SectionTitle eyebrow="Flashcard Gym" title={allCards[cardIndex][0]} subtitle={`${cardIndex + 1}/${allCards.length}`} />
+            <button className="flashcard" onClick={() => setFlipped((f) => !f)}>
+              <div>
+                <p className="flash-label">{flipped ? "Answer" : "Tap to reveal"}</p>
+                <p className="flash-text">{flipped ? allCards[cardIndex][1] : allCards[cardIndex][0]}</p>
+              </div>
+            </button>
+            <div className="segmented">
+              <ActionButton onClick={() => { setCardIndex((i) => (i - 1 + allCards.length) % allCards.length); setFlipped(false); }}>Previous</ActionButton>
+              <ActionButton active onClick={() => setFlipped((f) => !f)}>Flip</ActionButton>
+              <ActionButton onClick={() => { setCardIndex((i) => (i + 1) % allCards.length); setFlipped(false); }}>Next</ActionButton>
             </div>
-          </Panel>
-        </main>
-      )}
+          </main>
+        )}
+
+        {tab === "bot" && (
+          <main>
+            <SectionTitle eyebrow="Formula Bot" title="Ask the Physics Bot" subtitle="Describe the problem and it will pick the event type." />
+            <CardShell tone="green">
+              {botMessages.map((m, i) => <p key={`${m.who}-${i}`} className={`chat ${m.who}`}>{m.text}</p>)}
+              <input className="input" value={botInput} onChange={(e) => setBotInput(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") sendBotQuestion(); }} placeholder="Example: How do I solve a projectile problem?" />
+              <ActionButton variant="primary" onClick={sendBotQuestion}>Ask Bot</ActionButton>
+            </CardShell>
+          </main>
+        )}
+      </div>
     </div>
   );
 }
